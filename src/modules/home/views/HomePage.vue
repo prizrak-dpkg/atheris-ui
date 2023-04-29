@@ -87,6 +87,7 @@ $color-palette: (
 );
 $font-weight: (
   extra-light: var(--font-weight-extra-light),
+  medium: var(--font-weight-medium),
   bold: var(--font-weight-bold),
 );
 $assets: (
@@ -163,7 +164,7 @@ $assets: (
     border-radius: 16px;
     border: none;
     background: map-get($map: $color-palette, $key: third);
-    color: map-get($map: $color-palette, $key: fourth);
+    color: map-get($map: $color-palette, $key: first);
     font-size: 16px;
     font-weight: map-get($map: $font-weight, $key: medium);
     padding: 12px 32px;
@@ -182,7 +183,9 @@ $assets: (
     user-select: none;
     width: 100%;
     .video__text:hover,
-    .page__play:hover + .video__text {
+    .video__text:active,
+    .page__play:hover + .video__text,
+    .page__play:active + .video__text {
       color: map-get($map: $color-palette, $key: second);
       cursor: pointer;
       text-decoration: underline;

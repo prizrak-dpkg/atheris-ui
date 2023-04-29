@@ -2,7 +2,7 @@ export default {
   name: "home",
   component: () =>
     import(
-      /* webpackChunkName: "Home Layout" */ "@/modules/home/layouts/HomeLayout.vue"
+      /* webpackChunkName: "Home Layout" */ "@/modules/shared/layouts/SharedLayout.vue"
     ),
   children: [
     {
@@ -10,7 +10,7 @@ export default {
       name: "home-page",
       component: () =>
         import(
-          /* webpackChunkName: "Home Layout" */ "@/modules/home/views/HomePage.vue"
+          /* webpackChunkName: "Home Page" */ "@/modules/home/views/HomePage.vue"
         ),
     },
   ],

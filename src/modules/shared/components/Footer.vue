@@ -49,7 +49,7 @@ import { defineComponent } from "vue";
 import routes from "@/routes";
 
 export default defineComponent({
-  name: "HomeFooter",
+  name: "SharedFooter",
   setup() {
     return {
       routes,
@@ -156,6 +156,7 @@ $font-weight: (
     font-size: 1.2em;
     font-style: italic;
     font-weight: map-get($map: $font-weight, $key: extra-light);
+    text-align: center;
     user-select: none;
   }
 

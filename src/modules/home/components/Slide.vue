@@ -117,6 +117,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 $color-palette: (
+  first: var(--colors-first),
   second: var(--colors-second),
   third: var(--colors-third),
   fourth: var(--colors-fourth),
@@ -125,7 +126,7 @@ $font-weight: (
   medium: var(--font-weight-medium),
 );
 $assets: (
-  hoddie: var(--assets-hoddie),
+  hoodie: var(--assets-hoodie),
   t-shirt: var(--assets-t-shirt),
 );
 @mixin icon() {
@@ -188,9 +189,9 @@ $assets: (
     }
   }
 
-  &__hoddie {
+  &__hoodie {
     @include icon();
-    background-image: map-get($map: $assets, $key: hoddie);
+    background-image: map-get($map: $assets, $key: hoodie);
     height: 40px;
     width: 44px;
     &:hover,
@@ -242,7 +243,7 @@ $assets: (
     border-radius: 16px;
     border: none;
     background: map-get($map: $color-palette, $key: third);
-    color: map-get($map: $color-palette, $key: fourth);
+    color: map-get($map: $color-palette, $key: first);
     font-size: 16px;
     font-weight: map-get($map: $font-weight, $key: medium);
     padding: 12px 32px;

@@ -2,24 +2,24 @@
   <router-view v-slot="{ Component }">
     <component v-bind:is="Component">
       <template v-slot:header>
-        <HomeNavbar></HomeNavbar>
+        <SharedNavbar></SharedNavbar>
       </template>
       <template v-slot:footer>
-        <HomeFooter></HomeFooter>
+        <SharedFooter></SharedFooter>
       </template>
     </component>
   </router-view>
 </template>
 
 <script lang="ts">
-import HomeFooter from "../components/Footer.vue";
-import HomeNavbar from "../components/Navbar.vue";
+import SharedFooter from "../components/Footer.vue";
+import SharedNavbar from "../components/Navbar.vue";
 
 export default {
-  name: "HomeLayout",
+  name: "SharedLayout",
   components: {
-    HomeFooter,
-    HomeNavbar,
+    SharedFooter,
+    SharedNavbar,
   },
 };
 </script>

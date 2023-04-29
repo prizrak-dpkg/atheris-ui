@@ -99,7 +99,7 @@ import useClickOutside from "../composables/useClickOutside";
 import routes from "@/routes";
 
 export default defineComponent({
-  name: "HomeNavbar",
+  name: "SharedNavbar",
   setup() {
     let onClickOutsideNavigation = (event: Event) => {
       event;

@@ -1,7 +1,7 @@
 import api, {
   PagedSlideInterface,
   SlideInterface as ApiSlideInterface,
-} from "@/modules/home/api";
+} from "@/modules/shared/api";
 import { Ref, ref } from "vue";
 import { AxiosResponse } from "axios";
 import { SlideInterface } from "../components/Slide.vue";
@@ -31,7 +31,7 @@ export default () => {
         },
         slideInfo: {
           classIcon: [
-            slide.title === "Camisetas" ? "slide__t-shirt" : "slide__hoddie",
+            slide.title === "Camisetas" ? "slide__t-shirt" : "slide__hoodie",
           ],
           title: slide.slideInfo.slide_title,
           desc: slide.slideInfo.slide_desc,

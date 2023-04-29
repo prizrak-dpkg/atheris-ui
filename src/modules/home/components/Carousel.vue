@@ -50,13 +50,13 @@ $color-palette: (
   second: var(--colors-second),
   third: var(--colors-third),
   fourth: var(--colors-fourth),
-  sixth: var(--colors-sixth),
+  zero: var(--colors-zero),
 );
 .carousel {
   user-select: none;
 
   &__item {
-    background-color: map-get($map: $color-palette, $key: sixth);
+    background-color: map-get($map: $color-palette, $key: zero);
     border-radius: 8px;
     font-size: 20px;
     margin: 0px auto;
@@ -90,7 +90,8 @@ $color-palette: (
       width: 10px;
     }
 
-    &:hover::after {
+    &:hover::after,
+    &:active::after {
       background-color: map-get($map: $color-palette, $key: third);
     }
   }

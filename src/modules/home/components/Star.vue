@@ -13,7 +13,7 @@ import { defineComponent, computed, watch, ref, getCurrentInstance } from "vue";
 import "vue3-carousel/dist/carousel.css";
 
 export default defineComponent({
-  name: "ColumnSection",
+  name: "HomeStar",
   emits: ["changeRating"],
   props: {
     rating: {

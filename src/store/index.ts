@@ -1,8 +1,6 @@
 import { createStore } from "vuex";
-import home from "@/modules/home/store";
+import design from "@/modules/design/store";
 
 export default createStore({
-  modules: {
-    home,
-  },
+  modules: { design },
 });

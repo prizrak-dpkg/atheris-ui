@@ -1,7 +1,7 @@
 import api, {
   PagedRatingInterface,
   RatingInterface as ApiRatingInterface,
-} from "@/modules/home/api";
+} from "@/modules/shared/api";
 import { Ref, ref } from "vue";
 import { AxiosResponse } from "axios";
 import { RatingInterface } from "../components/Rating.vue";

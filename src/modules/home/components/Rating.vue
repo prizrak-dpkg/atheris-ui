@@ -31,7 +31,7 @@ export interface RatingInterface {
 }
 
 export default defineComponent({
-  name: "ColumnSection",
+  name: "HomeRating",
   components: {
     HomeStart,
   },
