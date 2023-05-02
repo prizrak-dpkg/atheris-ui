@@ -79,9 +79,7 @@ export default defineComponent({
                     material.map.repeat.set(1, 1);
                     material.metalness = 1;
                     material.side = 2;
-                    console.log("BEFORE:", mesh.value.material);
                     mesh.value.material = material;
-                    console.log("AFTER:", mesh.value.material);
                   }
                 });
               });
@@ -133,6 +131,7 @@ export default defineComponent({
             scene.add(model);
             const object = model.getObjectByName(props.mode);
             if (object) mesh.value = object as THREE.Mesh;
+            changeColor(color.value);
             loading.value = false;
           });
         });

@@ -113,10 +113,11 @@ $font-weight: (
     grid-template-columns: 30% 70%;
     place-items: center;
     width: 100%;
-    height: 120px;
+    height: 140px;
     border: 2px solid map-get($map: $color-palette, $key: fifth);
     border-radius: 16px;
     padding: 2em;
+    gap: 10px;
     text-align: center;
     font-size: 1.2em;
 

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import homeRouter from "@/modules/home/router";
 import designRouter from "@/modules/design/router";
+import trackRouter from "@/modules/track/router";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,6 +11,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/design",
     ...designRouter,
+  },
+  {
+    path: "/track",
+    ...trackRouter,
   },
 ];
 

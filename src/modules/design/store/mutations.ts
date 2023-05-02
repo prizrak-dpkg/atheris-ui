@@ -1,8 +1,13 @@
 import { DesignModeEnum } from "@/modules/shared/types";
-import { BodyTypeEnum, ProductMeasuresInterface } from "../types";
+import {
+  BodyTypeEnum,
+  ProductConfigInterface,
+  ProductInterface,
+} from "../types";
+import { InitialState } from "./state";
 
 export const setProductMeasures = (
-  state: ProductMeasuresInterface,
+  state: ProductInterface,
   payload: number
 ) => {
   const mode = state.mode === DesignModeEnum.TShirt ? 1.5 : 1.6;
@@ -46,8 +51,8 @@ export const setProductMeasures = (
 };
 
 export const setCustomerProfile = (
-  state: ProductMeasuresInterface,
-  payload: ProductMeasuresInterface["customerProfile"]
+  state: ProductInterface,
+  payload: ProductInterface["customerProfile"]
 ) => {
   state.customerProfile.age = payload.age
     ? payload.age
@@ -67,16 +72,66 @@ export const setCustomerProfile = (
 };
 
 export const setMode = (
-  state: ProductMeasuresInterface,
-  payload: ProductMeasuresInterface["mode"]
+  state: ProductInterface,
+  payload: ProductInterface["mode"]
 ) => {
   state.mode = payload ? payload : state.mode;
 };
 
 export const setColors = (
-  state: ProductMeasuresInterface,
-  payload: ProductMeasuresInterface["productColors"]
+  state: ProductInterface,
+  payload: ProductInterface["productColors"]
 ) => {
-  console.log(payload);
   state.productColors = payload ? payload : state.productColors;
+};
+
+export const resetState = (state: ProductInterface) => {
+  state.mode = InitialState.mode;
+  state.customerProfile = {
+    age: InitialState.customerProfile.age,
+    height: InitialState.customerProfile.height,
+    weight: InitialState.customerProfile.weight,
+    shoeSize: InitialState.customerProfile.shoeSize,
+    bodyType: InitialState.customerProfile.bodyType,
+  };
+  state.productMeasures = {
+    chestWidth: InitialState.productMeasures.chestWidth,
+    waistWidth: InitialState.productMeasures.waistWidth,
+    neckToHipHeight: InitialState.productMeasures.neckToHipHeight,
+    sleeveLengthShirt: InitialState.productMeasures.sleeveLengthShirt,
+    sleeveLengthHoodie: InitialState.productMeasures.sleeveLengthHoodie,
+  };
+  state.productColors = {
+    primaryColor: InitialState.productColors.primaryColor,
+    secondColor: InitialState.productColors.secondColor,
+  };
+};
+
+export const resetShoppingList = (state: ProductInterface) => {
+  state.productList = [];
+};
+
+export const closeShoppingCart = (state: ProductInterface) => {
+  state.openShoppingCart = false;
+};
+
+export const openShoppingCart = (state: ProductInterface) => {
+  state.openShoppingCart = true;
+};
+
+export const toggleShoppingCart = (state: ProductInterface) => {
+  state.openShoppingCart = !state.openShoppingCart;
+};
+
+export const addProduct = (
+  state: ProductInterface,
+  payload: ProductConfigInterface
+) => {
+  state.productList.push(payload);
+};
+
+export const removeProduct = (state: ProductInterface, payload: number) => {
+  if (payload >= 0 && payload < state.productList.length) {
+    state.productList.splice(payload, 1);
+  }
 };

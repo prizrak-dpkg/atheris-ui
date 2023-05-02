@@ -8,15 +8,12 @@
         ><i class="navbar__logo navbar__logo-toggle" @click="hideMenu"></i
       ></router-link>
       <div class="navbar__right-options">
-        <i class="navbar__shopping-cart" @click="hideMenu"></i>
-        <span class="navbar__counter">+9</span>
-        <i
-          ref="toggleButtonRef"
-          :class="dropMenu"
-          @click="() => (openDropMenu = !openDropMenu)"
-        ></i>
+        <i class="navbar__shopping-cart" @click="toggleShoppingCart"></i>
+        <span class="navbar__counter">+{{ shoppingListCount }}</span>
+        <i ref="toggleButtonRef" :class="dropMenu" @click="toggleMenu"></i>
       </div>
     </div>
+    <ShoppingCart></ShoppingCart>
     <ul class="navbar__drop-down" :class="open" ref="navigationRef">
       <div ref="firstGroupRef">
         <li class="navbar__drop-down-item">
@@ -27,26 +24,6 @@
             @dragstart.prevent=""
             :replace="true"
             >Diseña tu producto</router-link
-          >
-        </li>
-        <li class="navbar__drop-down-item">
-          <router-link
-            :to="{ name: routes.community }"
-            class="navbar__drop-down-link"
-            @click="hideMenu"
-            @dragstart.prevent=""
-            :replace="true"
-            >Diseños de la comunidad</router-link
-          >
-        </li>
-        <li class="navbar__drop-down-item">
-          <router-link
-            :to="{ name: routes.news }"
-            class="navbar__drop-down-link"
-            @click="hideMenu"
-            @dragstart.prevent=""
-            :replace="true"
-            >Noticias</router-link
           >
         </li>
         <li class="navbar__drop-down-item">
@@ -97,13 +74,23 @@ import {
 } from "vue";
 import useClickOutside from "../composables/useClickOutside";
 import routes from "@/routes";
+import ShoppingCart from "./ShoppingCart.vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "SharedNavbar",
+  components: {
+    ShoppingCart,
+  },
   setup() {
     let onClickOutsideNavigation = (event: Event) => {
       event;
     };
+    const store = useStore();
+    const shoppingListCount = computed(() => {
+      const count = store.getters["design/getShoppingListCount"];
+      return count > 9 ? 9 : count;
+    });
     const openDropMenu = ref(false);
     const height = ref(0);
     const toggleButtonRef: Ref<HTMLElement | undefined> = ref();
@@ -139,6 +126,9 @@ export default defineComponent({
       "navbar__up-right": openDropMenu.value,
     }));
     const marginTop = computed(() => calculateTopMargin(height.value));
+    const closeShoppingCart = () => {
+      store.commit("design/closeShoppingCart");
+    };
     onMounted(() => {
       const { onClickOutside } = useClickOutside(toggleButtonRef);
       const { onClickOutside: onClickOutsideNav } =
@@ -165,8 +155,16 @@ export default defineComponent({
       firstGroupRef,
       secondGroupRef,
       routes,
+      shoppingListCount,
+      toggleMenu: () => {
+        openDropMenu.value = !openDropMenu.value;
+        if (openDropMenu.value) closeShoppingCart();
+      },
       hideMenu: () => {
         openDropMenu.value = false;
+      },
+      toggleShoppingCart: () => {
+        store.commit("design/toggleShoppingCart");
       },
     };
   },

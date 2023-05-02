@@ -1,6 +1,6 @@
 <template>
   <div class="config__grid">
-    <div class="config__section">
+    <div v-if="step < 5" class="config__section">
       <TDButton
         v-if="!showModel"
         @on-click="() => (showModel = true)"
@@ -19,14 +19,47 @@
         <div v-if="step === 1">
           <h1>DISEÑO</h1>
           <p class="config__text">Ajusta tu diseño</p>
-          <h2 class="config__text config__text--title">
+          <h2
+            v-if="props.mode === tShirtMode"
+            class="config__text config__text--title"
+          >
             Camiseta atheris / Lana merino
           </h2>
-          <p class="config__text config__text--paragraph">
+          <h2
+            v-if="props.mode === tShirtMode"
+            class="config__text config__text--title"
+          >
+            $54,900.00
+          </h2>
+          <h2
+            v-if="props.mode === hoodieMode"
+            class="config__text config__text--title"
+          >
+            Hoodie atheris / 93% algodón y 7% poliéster
+          </h2>
+          <h2
+            v-if="props.mode === hoodieMode"
+            class="config__text config__text--title"
+          >
+            $79,900.00
+          </h2>
+          <p
+            v-if="props.mode === tShirtMode"
+            class="config__text config__text--paragraph"
+          >
             Esta camiseta tiene una textura sutil y brillo que le da vida al
             color y añade un toque elegante. La lana merino es naturalmente
             termorreguladora, lo que significa que te mantiene fresco cuando
             hace calor y caliente cuando hace frío.
+          </p>
+          <p
+            v-if="props.mode === hoodieMode"
+            class="config__text config__text--paragraph"
+          >
+            Este hoodie de mezclas de 93% algodón y 7% poliéster es suave y
+            cómodo al tacto, gracias a la presencia del algodón en su
+            composición. La adición de poliéster lo hace más resistente a las
+            arrugas y duradero en comparación con los hoodies de algodón puro.
           </p>
           <h3 class="config__text config__text--subtitle">Color primario</h3>
           <Color v-model="primaryColor"></Color>
@@ -89,11 +122,31 @@
             :body-type="bodyType"
           ></Hoodie>
         </div>
+        <div v-if="step === 5">
+          <div class="config__limit">
+            <h1 class="config__text--center">
+              ¡HA COMPLETADO EL DISEÑO DE SU PRODUCTO!
+            </h1>
+            <p class="config__text config__text--center">
+              Su producto se ha añadido correctamente, puede crear otro diseño o
+              completar su compra, accediendo al carrito de compras.
+            </p>
+            <button
+              class="config__sc-button"
+              type="button"
+              @click="openShoppingCart"
+            >
+              <i class="config__shopping-cart"></i>
+            </button>
+          </div>
+        </div>
         <div class="config__footer">
           <button class="config__button" type="button" @click="onBack">
             Atrás
           </button>
-          <button class="config__button" type="submit">{{ nextText }}</button>
+          <button v-if="step < 5" class="config__button" type="submit">
+            {{ nextText }}
+          </button>
         </div>
       </form>
     </div>
@@ -178,9 +231,12 @@ export default defineComponent({
         showModel.value = false;
         modelWidth.value = width;
       },
+      openShoppingCart: () => {
+        store.commit("design/openShoppingCart");
+      },
       onBack: () => {
         nextText.value = "Siguiente";
-        if (step.value === 1) {
+        if (step.value === 1 || step.value === 5) {
           router.replace({ name: routes.design });
         }
         if (step.value > 1) step.value -= 1;
@@ -203,9 +259,16 @@ export default defineComponent({
           });
           store.commit("design/setProductMeasures", 0);
         }
-        if (step.value < 4) step.value += 1;
+        if (step.value < 5) step.value += 1;
         if (step.value === 4) {
           nextText.value = "Añadir";
+        }
+        if (step.value === 5) {
+          store.commit(
+            "design/addProduct",
+            store.getters["design/getProductConfig"]
+          );
+          store.commit("design/resetState");
         }
       },
     };
@@ -226,6 +289,9 @@ $font-weight: (
   medium: var(--font-weight-medium),
   bold: var(--font-weight-bold),
 );
+$assets: (
+  shopping-cart: var(--assets-shopping-cart),
+);
 @mixin grid(
   $gap,
   $autoflow,
@@ -245,15 +311,66 @@ $font-weight: (
   );
   place-items: $aling $justify;
 }
+@mixin icon() {
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 25px;
+  width: 25px;
+}
 .config {
   &__grid {
     @include grid(10px 50px, row, min-content, 500px, 1fr, center, center);
     width: 100%;
   }
 
+  &__limit {
+    display: grid;
+    justify-items: center;
+    gap: 24px;
+    width: 50%;
+    margin: auto;
+
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+    @media (max-width: 576px) {
+      width: 100%;
+    }
+  }
+
+  &__shopping-cart {
+    @include icon();
+    background-image: map-get($map: $assets, $key: shopping-cart);
+    height: 8em;
+    width: 8em;
+  }
+
+  &__sc-button {
+    border: solid 2px map-get($map: $color-palette, $key: third);
+    background: none;
+    border-radius: 24px;
+    padding: 2em;
+
+    &:hover,
+    &:active {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:active > .config__shopping-cart {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+
   &__text {
     font-size: 1.5em;
     margin-bottom: 12px;
+
+    &--center {
+      text-align: center;
+    }
 
     &--title {
       font-weight: map-get($map: $font-weight, $key: bold);
@@ -273,7 +390,6 @@ $font-weight: (
   &__section {
     display: grid;
     font-size: 12px;
-    padding: 25px;
     width: 100%;
   }
 

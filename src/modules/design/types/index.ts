@@ -29,8 +29,6 @@ export interface MeasuresInterface {
   neckToHipHeight: number;
   sleeveLengthShirt: number;
   sleeveLengthHoodie: number;
-  primaryColor: ColorsEnum;
-  secondColor: ColorsEnum;
 }
 
 export interface ColorsInterface {
@@ -38,9 +36,29 @@ export interface ColorsInterface {
   secondColor: ColorsEnum;
 }
 
-export interface ProductMeasuresInterface {
+export interface ProductConfigInterface {
   mode: DesignModeEnum;
   customerProfile: CustomerProfileInterface;
   productMeasures: MeasuresInterface;
   productColors: ColorsInterface;
+}
+
+export interface ProductListInterface {
+  primaryColor: string;
+  secondColor: string;
+  chestWidth: number;
+  waistWidth: number;
+  neckToHipHeight: number;
+  sleeveLengthShirt: number;
+  sleeveLengthHoodie: number;
+  age: number;
+  height: number;
+  weight: number;
+  shoeSize: number;
+  bodyType: number;
+}
+
+export interface ProductInterface extends ProductConfigInterface {
+  openShoppingCart: boolean;
+  productList: ProductConfigInterface[];
 }
