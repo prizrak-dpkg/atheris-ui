@@ -5,6 +5,10 @@ import trackRouter from "@/modules/track/router";
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: "/",
+    redirect: "/auth",
+  },
+  {
     path: "/home",
     ...homeRouter,
   },
