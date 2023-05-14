@@ -13,5 +13,13 @@ export default {
           /* webpackChunkName: "Home Page" */ "@/modules/track/views/TrackPage.vue"
         ),
     },
+    {
+      path: ":trackId",
+      name: "track-item",
+      component: () =>
+        import(
+          /* webpackChunkName: "Requests List" */ "@/modules/track/views/TrackItem.vue"
+        ),
+    },
   ],
 };

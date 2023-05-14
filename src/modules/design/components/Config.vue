@@ -156,7 +156,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, ref, Ref } from "vue";
 import "vue3-carousel/dist/carousel.css";
-import ConfigRange from "./Range.vue";
+import ConfigRange from "@/modules/shared/components/Range.vue";
 import BodyType from "./BodyType.vue";
 import TShirt from "./TShirt.vue";
 import TDModel from "./3DModel.vue";

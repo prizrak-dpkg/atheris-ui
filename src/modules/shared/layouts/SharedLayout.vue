@@ -14,12 +14,13 @@
 <script lang="ts">
 import SharedFooter from "../components/Footer.vue";
 import SharedNavbar from "../components/Navbar.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "SharedLayout",
   components: {
     SharedFooter,
     SharedNavbar,
   },
-};
+});
 </script>

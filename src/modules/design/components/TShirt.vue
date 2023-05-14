@@ -20,7 +20,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
 import "vue3-carousel/dist/carousel.css";
-import ConfigRange from "./Range.vue";
+import ConfigRange from "@/modules/shared/components/Range.vue";
 import WiderTShirt from "./WiderTShirt.vue";
 import SameTShirt from "./SameTShirt.vue";
 import NarrowerTShirt from "./NarrowerTShirt.vue";

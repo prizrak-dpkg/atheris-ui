@@ -13,5 +13,13 @@ export default {
           /* webpackChunkName: "Home Page" */ "@/modules/home/views/HomePage.vue"
         ),
     },
+    {
+      path: "",
+      name: "not-implemented",
+      component: () =>
+        import(
+          /* webpackChunkName: "Not Implemented" */ "@/modules/shared/views/NotImplemented.vue"
+        ),
+    },
   ],
 };

@@ -1,0 +1,25 @@
+version: "3.9"
+
+networks:
+  nginx_proxy_ui:
+    driver: bridge
+
+services:
+  nginx:
+    image: nginx:1.23-alpine
+    container_name: nginx_proxy_ui
+    ports:
+      - 80:80
+    volumes:
+      - /root/crab/crab-ui-test/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - nginx_proxy_ui
+
+  atheris_ui:
+    container_name: atheris_ui
+    image: atheris_ui:0.1.0
+    restart: always
+    environment:
+      VIRTUAL_HOST: altergeist.xyz
+    networks:
+      - nginx_proxy_ui

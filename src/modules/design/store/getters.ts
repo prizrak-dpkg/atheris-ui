@@ -2,7 +2,7 @@ import {
   DesignModeEnum,
   ShoppingListItemInterface,
 } from "@/modules/shared/types";
-import { ProductInterface, ProductListInterface } from "../types";
+import { ProductInterface } from "../types";
 
 export const getAge = (state: ProductInterface) => {
   return state.customerProfile.age;

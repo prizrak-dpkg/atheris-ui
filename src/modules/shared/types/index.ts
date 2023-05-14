@@ -27,3 +27,9 @@ export interface CustomerRegisterInterface {
   city: string;
   address: string;
 }
+
+export interface RatingRegisterInterface {
+  comment: string;
+  qualification: number;
+  owner: string;
+}

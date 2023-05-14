@@ -3,9 +3,9 @@ export default {
   design: "design-page",
   designTShirt: "design-t-shirt",
   designHoodie: "design-hoodie",
-  terms: "home-page",
-  about: "home-page",
+  terms: "not-implemented",
+  about: "not-implemented",
   track: "track-page",
-  faqs: "home-page",
-  policy: "home-page",
+  faqs: "not-implemented",
+  policy: "not-implemented",
 };

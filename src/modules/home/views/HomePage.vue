@@ -9,10 +9,6 @@
       </p>
       <div class="page__footer">
         <button class="page__button" @click="scrollToExplore">Explorar</button>
-        <div class="page__video">
-          <i class="page__play"></i>
-          <span class="video__text">Ver video</span>
-        </div>
       </div>
     </HomeColumn>
     <HomeCarousel :slides="slides" id="explore"></HomeCarousel>
@@ -42,7 +38,7 @@
 import { defineComponent, ref } from "vue";
 import useSlides from "../composables/useSlides";
 import HomeCarousel from "../components/Carousel.vue";
-import HomeColumn from "../components/Column.vue";
+import HomeColumn from "@/modules/shared/components/Column.vue";
 import HomeStar from "../components/Star.vue";
 import HomeRating from "../components/Rating.vue";
 

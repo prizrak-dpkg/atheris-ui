@@ -45,6 +45,13 @@ export interface PagedRatingInterface {
   results: RatingInterface[];
 }
 
+export interface TrackStatusInterface {
+  total: number;
+  ready: number;
+  status: number;
+  rating: boolean;
+}
+
 export const isErrorResponse = (
   resp: unknown
 ): resp is ErrorResponseInterface => {
