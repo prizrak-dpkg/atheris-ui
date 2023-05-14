@@ -1,9 +1,8 @@
 FROM node:18.15.0-alpine3.16 as build-stage
 RUN npm install -g pnpm
 WORKDIR /ui
-COPY package*.json /ui
-RUN pnpm install
 COPY . /ui
+RUN pnpm install
 RUN pnpm run lint --fix
 RUN npm i --save-dev @types/node
 RUN pnpm run build
