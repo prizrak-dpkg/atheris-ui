@@ -84,5 +84,5 @@ export const isErrorResponse = (
 };
 
 export default axios.create({
-  baseURL: "http://api.altergeist.xyz/api",
+  baseURL: "https://api.altergeist.xyz/api",
 });
